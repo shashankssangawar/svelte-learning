@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&display=swap');
 @import "tailwindcss";
-
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
@@ -117,6 +116,7 @@
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
+  --color-primary-alternate: var(--primary);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
@@ -170,4 +170,31 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+@layer components {
+
+  /* 🔥 Text Shimmer */
+  .text-hot-shimmer {
+    @apply bg-linear-to-r from-foreground via-primary-alternate to-primary-alternate 
+           bg-size-[200%_100%] bg-clip-text text-transparent;
+    animation: shimmer 3s ease-in-out infinite;
+  }
+
+  .text-shimmer {
+    @apply bg-linear-to-r from-foreground via-primary to-foreground 
+           bg-size-[200%_100%] bg-clip-text text-transparent;
+    animation: shimmer 3s ease-in-out infinite;
+  }
+
+  /* ✨ Shimmer Animation */
+  @keyframes shimmer {
+    0%, 100% {
+      background-position: 200% 0;
+    }
+    50% {
+      background-position: -200% 0;
+    }
+  }
+
 }
