@@ -1,22 +1,19 @@
 <script module>
+  import {
+    SquareTerminal as SquareTerminalIcon,
+    Bot as BotIcon,
+    BookOpen as BookOpenIcon,
+    Settings2 as Settings2Icon,
+    Frame as FrameIcon,
+    ChartPie as ChartPieIcon,
+    Map as MapIcon,
+  } from "@lucide/svelte";
   import AudioWaveformIcon from "@lucide/svelte/icons/audio-waveform";
-  import BookOpenIcon from "@lucide/svelte/icons/book-open";
-  import BotIcon from "@lucide/svelte/icons/bot";
-  import ChartPieIcon from "@lucide/svelte/icons/chart-pie";
   import CommandIcon from "@lucide/svelte/icons/command";
-  import FrameIcon from "@lucide/svelte/icons/frame";
   import GalleryVerticalEndIcon from "@lucide/svelte/icons/gallery-vertical-end";
-  import MapIcon from "@lucide/svelte/icons/map";
-  import Settings2Icon from "@lucide/svelte/icons/settings-2";
-  import SquareTerminalIcon from "@lucide/svelte/icons/square-terminal";
 
   // This is sample data.
   const data = {
-    user: {
-      name: "shadcn",
-      email: "m@example.com",
-      avatar: "/avatars/shadcn.jpg",
-    },
     teams: [
       {
         name: "Acme Inc",
@@ -36,21 +33,29 @@
     ],
     navMain: [
       {
-        title: "Playground",
+        title: "New Chat",
         url: "#",
         icon: SquareTerminalIcon,
         isActive: true,
+      },
+      {
+        title: "Chats History",
+        url: "#",
+        icon: SquareTerminalIcon,
         items: [
           {
-            title: "History",
+            title: "Chat with Assistant",
+            description: "General Q&A and brainstorming",
             url: "#",
           },
           {
-            title: "Starred",
+            title: "UI Brainstorm",
+            description: "Layout ideas and component structure",
             url: "#",
           },
           {
-            title: "Settings",
+            title: "Database Schema Help",
+            description: "Discussed normalization and schema tweaks",
             url: "#",
           },
         ],
@@ -60,18 +65,9 @@
         url: "#",
         icon: BotIcon,
         items: [
-          {
-            title: "Genesis",
-            url: "#",
-          },
-          {
-            title: "Explorer",
-            url: "#",
-          },
-          {
-            title: "Quantum",
-            url: "#",
-          },
+          { title: "Genesis", url: "#" },
+          { title: "Explorer", url: "#" },
+          { title: "Quantum", url: "#" },
         ],
       },
       {
@@ -79,22 +75,10 @@
         url: "#",
         icon: BookOpenIcon,
         items: [
-          {
-            title: "Introduction",
-            url: "#",
-          },
-          {
-            title: "Get Started",
-            url: "#",
-          },
-          {
-            title: "Tutorials",
-            url: "#",
-          },
-          {
-            title: "Changelog",
-            url: "#",
-          },
+          { title: "Introduction", url: "#" },
+          { title: "Get Started", url: "#" },
+          { title: "Tutorials", url: "#" },
+          { title: "Changelog", url: "#" },
         ],
       },
       {
@@ -102,40 +86,11 @@
         url: "#",
         icon: Settings2Icon,
         items: [
-          {
-            title: "General",
-            url: "#",
-          },
-          {
-            title: "Team",
-            url: "#",
-          },
-          {
-            title: "Billing",
-            url: "#",
-          },
-          {
-            title: "Limits",
-            url: "#",
-          },
+          { title: "General", url: "#" },
+          { title: "Team", url: "#" },
+          { title: "Billing", url: "#" },
+          { title: "Limits", url: "#" },
         ],
-      },
-    ],
-    projects: [
-      {
-        name: "Design Engineering",
-        url: "#",
-        icon: FrameIcon,
-      },
-      {
-        name: "Sales & Marketing",
-        url: "#",
-        icon: ChartPieIcon,
-      },
-      {
-        name: "Travel",
-        url: "#",
-        icon: MapIcon,
       },
     ],
   };
@@ -147,6 +102,7 @@
   import NavUser from "./nav-user.svelte";
   import TeamSwitcher from "./team-switcher.svelte";
   import * as Sidebar from "$lib/components/ui/sidebar/index.js";
+  import { authStore } from "@/stores/auth-stores";
   let { ref = $bindable(null), collapsible = "icon", ...restProps } = $props();
 </script>
 
@@ -156,11 +112,9 @@
   </Sidebar.Header>
   <Sidebar.Content>
     <NavMain items={data.navMain} />
-    <NavProjects projects={data.projects} />
   </Sidebar.Content>
   <Sidebar.Footer>
-    <NavUser user={data.user} />
+    <NavUser user={$authStore.user} />
   </Sidebar.Footer>
   <Sidebar.Rail />
 </Sidebar.Root>
-
