@@ -3,6 +3,7 @@
   import * as DropdownMenu from "$lib/components/ui/dropdown-menu/index.js";
   import * as Sidebar from "$lib/components/ui/sidebar/index.js";
   import { useSidebar } from "$lib/components/ui/sidebar/index.js";
+  import { INTERNAL_LINKS } from "@/constants/urls";
   import BadgeCheckIcon from "@lucide/svelte/icons/badge-check";
   import BellIcon from "@lucide/svelte/icons/bell";
   import ChevronsUpDownIcon from "@lucide/svelte/icons/chevrons-up-down";
@@ -63,10 +64,12 @@
         </DropdownMenu.Group>
         <DropdownMenu.Separator />
         <DropdownMenu.Group>
-          <DropdownMenu.Item>
-            <BadgeCheckIcon />
-            Account
-          </DropdownMenu.Item>
+          <a href={INTERNAL_LINKS.PROFILE}>
+            <DropdownMenu.Item>
+              <BadgeCheckIcon />
+              Account
+            </DropdownMenu.Item>
+          </a>
           <DropdownMenu.Item>
             <CreditCardIcon />
             Billing
@@ -85,4 +88,3 @@
     </DropdownMenu.Root>
   </Sidebar.MenuItem>
 </Sidebar.Menu>
-

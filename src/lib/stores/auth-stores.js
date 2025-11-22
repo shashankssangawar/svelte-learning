@@ -6,6 +6,10 @@ function createAuthStore() {
       name: "Shashank",
       email: "shashank@domain.com",
       avatar: "/avatars/pfp.jpg",
+      subscription: {
+        status: 'Active',
+        plan: 'SIGMA'
+      }
     }
   });
 

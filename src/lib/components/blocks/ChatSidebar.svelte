@@ -1,4 +1,5 @@
 <script>
+  import * as Avatar from "$lib/components/ui/avatar/index.js";
   import AppSidebar from "$lib/components/app-sidebar.svelte";
   import * as Breadcrumb from "$lib/components/ui/breadcrumb/index.js";
   import { Separator } from "$lib/components/ui/separator/index.js";
@@ -6,6 +7,10 @@
   import { sidebarStore } from "@/stores/bread-crumb-header";
   import { onMount } from "svelte";
   import ModeToggle from "../ui/mode-toggle/ModeToggle.svelte";
+  import Pricing from "./Pricing.svelte";
+  import { authStore } from "@/stores/auth-stores";
+  import Button from "../ui/button/button.svelte";
+  import { INTERNAL_LINKS } from "@/constants/urls";
 
   let { children } = $props();
 </script>
@@ -30,7 +35,22 @@
           </Breadcrumb.List>
         </Breadcrumb.Root>
       </div>
-      <ModeToggle />
+      <div class="flex items-center gap-2">
+        <ModeToggle />
+        <Pricing />
+        <a href={INTERNAL_LINKS.PROFILE}>
+          <Button variant="outline" size="icon">
+            <Avatar.Root class="size-8 rounded-lg">
+              <Avatar.Image
+                src={$authStore.user.avatar}
+                alt={$authStore.user.name}
+                class="rounded-sm!"
+              />
+              <Avatar.Fallback class="rounded-lg">CN</Avatar.Fallback>
+            </Avatar.Root>
+          </Button>
+        </a>
+      </div>
     </header>
     {@render children()}
   </Sidebar.Inset>

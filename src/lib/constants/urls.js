@@ -1,3 +1,4 @@
 export const INTERNAL_LINKS = {
-  HOME: '/'
+  HOME: '/',
+  PROFILE: '/profile'
 }
